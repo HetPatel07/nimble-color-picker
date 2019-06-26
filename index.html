@@ -15,10 +15,13 @@
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
     <style>
+        .row {
+            height: 300%;
+        }
+
         .main {
-            height: 100%;
-            width: 100%;
-            position: fixed;
+            height: 33.33%;
+            position: sticky;
             top: 0;
         }
 
@@ -27,16 +30,36 @@
             height: 100%;
             padding-bottom: 100%;
         }
+
+        .contentMain {
+            background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
+            width: 110px;
+            padding: 20px 0;
+            display: inline-block;
+            color: #fff;
+            font-weight: 600;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
     </style>
 </head>
 
 <body class="h-100">
 
     <!-- Start your project here-->
-
-    <div class="main" id="main">
+    <div class="container-fluid h-100">
+        <div class="row">
+            <div class="main col" id="main">
+                <div class="contentMain text-center">
+                    <p class="content m-0"></p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="inner"></div>
+
 
     <!-- Start your project here-->
 
@@ -50,4 +73,6 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script src="js/main.js"></script>
-</body></html>
+</body>
+
+</html>
