@@ -4,8 +4,8 @@ var x;
 var y;
 
 function hw() {
-    console.log('hello');
     var width = $('#main').innerWidth();
+    console.log(width);
     var height = $('#main').innerHeight();
     x = width / 360;
     y = height / 100;
@@ -17,17 +17,10 @@ var s;
 var l = 63 + '%';
 var mainHeight = $('#main').css('height');
 mainHeight = parseInt(mainHeight);
+
 console.log(mainHeight);
 var m = 0;
 var hsl;
-$(document).click(function () {
-    var newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'col main');
-    var row = document.getElementsByClassName('row')[0];
-    row.insertBefore(newDiv, document.getElementById('main'));
-    newDiv.style.background = hsl;
-    console.log(hsl);
-})
 
 $(document).scroll(function (event) {
     l = Math.round(scrollY / z) + '%';
@@ -37,25 +30,56 @@ $(document).scroll(function (event) {
         "background-color": hsl,
     });
 });
-$('#main').mousemove(function () {
+$('#main').mousemove(function (event) {
     hw();
-    hue = Math.round(event.pageX / x);
-
+    var relX = event.pageX - $(this).offset().left;
+    hue = Math.round(relX / x);
+    //    console.log(event.pageX)
     var rect = event.target.getBoundingClientRect();
     var m = event.clientY - rect.top;
     s = Math.round(m / y);
     hsl = 'hsl(' + hue + ', ' +
         l + ' ,' + s + '% )';
     var light = parseInt(l);
-    //    var sat = parseInt(s);
-    //    var light = parseInt(l);
-    console.log(hsl);
+    //    console.log(hsl);
     $('#main').css({
         "background-color": hsl,
     });
-    $('.content').html(HSLToHex(h, s, light));
+    $('.content').html(HSLToHex(h, light, s));
 });
 
+$('#main').click(function () {
+    var newDiv = document.createElement('div');
+    newDiv.setAttribute('class', 'onclick col');
+    var mainWidth = $('#main').innerWidth() / 3;
+    console.log(mainWidth);
+    var row = document.getElementsByClassName('row')[0];
+    row.insertBefore(newDiv, document.getElementById('main'));
+    newDiv.style.background = hsl;
+    //    $('.onclick').css('width', mainWidth + 'px');
+
+
+    //    var light = parseInt(l);
+    //    var contentDiv = document.createElement('div');
+    //    contentDiv.setAttribute('class', 'contentinner text-center');
+    //    newDiv.appendChild(contentDiv);
+    //    contentDiv.innerHTML = document.getElementById('content').innerHTML;
+
+    newDiv.setAttribute('data-change', document.getElementById('content').innerHTML);
+    //    newDiv.setAttribute('data-cancel', '<i class="far fa-window-close" onclick="my(this)"></i>');
+
+    var cancelBtn = document.createElement('div');
+    cancelBtn.setAttribute('class', 'cancelBtn text-center');
+    newDiv.appendChild(cancelBtn);
+    cancelBtn.innerHTML = '<i class="far fa-window-close"></i>';
+
+    cancelBtn.setAttribute('onclick', 'my(this)');
+});
+
+function my(e) {
+    console.log(e.parentElement);
+    e.parentElement.remove();
+}
 //hsl to rgb converter
 
 function HSLToHex(h, s, l) {

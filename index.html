@@ -19,18 +19,22 @@
             height: 300%;
         }
 
-        .main {
+        .main,
+        .onclick {
             height: 33.33%;
             position: sticky;
             top: 0;
         }
 
-        .inner {
-            width: 100%;
-            height: 100%;
-            padding-bottom: 100%;
+        #main {
+            flex-grow: 2;
         }
 
+        /*
+        .onclick{
+            height: 100%;
+        }
+*/
         .contentMain {
             background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
             width: 110px;
@@ -41,9 +45,45 @@
             position: relative;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
         }
 
+        .onclick::after {
+            content: attr(data-change);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            padding: 20px 0;
+            text-align: center;
+            background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
+            color: #fff;
+            font-weight: 600;
+        }
+
+/*
+        .onclick::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 100px;
+            padding: 20px 0;
+            text-align: center;
+            background-color: red;
+        }
+*/
+
+        .cancelBtn {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -54,7 +94,7 @@
         <div class="row">
             <div class="main col" id="main">
                 <div class="contentMain text-center">
-                    <p class="content m-0"></p>
+                    <p class="content m-0" id="content"></p>
                 </div>
             </div>
         </div>
@@ -73,6 +113,4 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script src="js/main.js"></script>
-</body>
-
-</html>
+</body></html>
