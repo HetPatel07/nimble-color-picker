@@ -24,17 +24,13 @@
             height: 33.33%;
             position: sticky;
             top: 0;
+            z-index: 11;
         }
 
         #main {
             flex-grow: 2;
         }
 
-        /*
-        .onclick{
-            height: 100%;
-        }
-*/
         .contentMain {
             background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
             width: 110px;
@@ -50,6 +46,7 @@
 
         .onclick::after {
             content: attr(data-change);
+/*            pointer-events: none;*/
             position: absolute;
             top: 50%;
             left: 50%;
@@ -60,9 +57,10 @@
             background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
             color: #fff;
             font-weight: 600;
+
         }
 
-/*
+        /*
         .onclick::before {
             content: '';
             position: absolute;
@@ -83,7 +81,10 @@
             right: 0;
             text-align: center;
             cursor: pointer;
+            font-size: 30px;
+            opacity: 0.8;
         }
+
     </style>
 </head>
 
@@ -101,6 +102,7 @@
     </div>
 
 
+
     <!-- Start your project here-->
 
     <!-- SCRIPTS -->
@@ -112,5 +114,21 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!--
+    <script src="js/clipboard.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            new ClipboardJS('.btn');
+        })
+    </script>
+-->
     <script src="js/main.js"></script>
-</body></html>
+    <script src="js/clipboard.min.js"></script>
+    <!--
+    <script>
+        new ClipboardJS('.onclick');
+    </script>
+-->
+</body>
+
+</html>
